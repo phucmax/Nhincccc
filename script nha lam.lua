@@ -240,6 +240,26 @@ MainTab:AddButton({
     end
 })
 
+local aimbotTab = Window:AddTab({
+    Title = "Script Tổng Hợp ngon",
+    Icon = "package"
+})
+
+
+MainTab:AddParagraph({
+    Title = "chú ý",
+    Content = "chú ý con cặc cái này là aimbot "
+   
+})
+
+
+aimbotTab:AddButton({
+    Title = "aimbot",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnhTuanDzai-Hub/AimBotSkibidi/refs/heads/main/TuanAnhIOS-AIMBOT.Lua"))()
+})
+
 local FixLagTab = Window:AddTab({
     Title = "FixLag",
     Icon = "wrench"
