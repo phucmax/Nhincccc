@@ -181,10 +181,149 @@ bountyTab:AddButton({
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/10f7f97cebba24a87808c36ebd345a97.lua"))()
     end
 })
-
 bountyTab:AddButton({
     Title = "Lion Auto Bounty",
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/l1siGJS1/raw"))()
+    end
+})
+local FixLagTab = Window:AddTab({
+    Title = "FixLag",
+    Icon = "wrench"
+})
+
+FixLagTab:AddParagraph({
+    Title = "Fix Lag Chú Ý",
+    Content = "không dùng x1x2x3max cùng một lúc"
+})
+
+-- Mức FixLag X1
+FixLagTab:AddButton({
+    Title = "FixLag X1",
+    Description = "50%",
+    Callback = function()
+        -- Xóa cây và bóng
+        for _, object in pairs(workspace:GetDescendants()) do
+            if object:IsA("Part") and object.Name == "Tree" then
+                object:Destroy()
+            end
+            if object:IsA("Part") and object.Name == "Shadow" then
+                object:Destroy()
+            end
+        end
+        game.Lighting:ClearAllChildren()  -- Xóa hiệu ứng trời
+    end
+})
+
+-- Mức FixLag X2
+FixLagTab:AddButton({
+    Title = "FixLag X2",
+    Description = "60%",
+    Callback = function()
+        -- Xóa cây, bóng, và xóa hiệu ứng skill
+        for _, object in pairs(workspace:GetDescendants()) do
+            if object:IsA("Part") and (object.Name == "Tree" or object.Name == "Shadow") then
+                object:Destroy()
+            end
+            if object:IsA("ParticleEmitter") or object:IsA("Trail") then
+                object:Destroy()  -- Xóa hiệu ứng skill
+            end
+        end
+        game.Lighting:ClearAllChildren()  -- Xóa hiệu ứng trời
+        -- Xóa vật thể nhỏ
+        for _, object in pairs(workspace:GetDescendants()) do
+            if object:IsA("Part") and object.Size.Magnitude < 10 then
+                object:Destroy()
+            end
+        end
+    end
+})
+
+-- Mức FixLag X3 (Giảm độ họa hết mức có thể và xóa sạch hoàn toàn cây)
+FixLagTab:AddButton({
+    Title = "FixLag X3",
+    Description = " 70%",
+    Callback = function()
+        -- Xóa cây, bóng, và xóa hiệu ứng skill
+        for _, object in pairs(workspace:GetDescendants()) do
+            if object:IsA("Part") and (object.Name == "Tree" or object.Name == "Shadow") then
+                object:Destroy()
+            end
+            if object:IsA("ParticleEmitter") or object:IsA("Trail") then
+                object:Destroy()  -- Xóa hiệu ứng skill
+            end
+        end
+        game.Lighting:ClearAllChildren()  -- Xóa hiệu ứng trời
+        -- Xóa vật thể nhỏ
+        for _, object in pairs(workspace:GetDescendants()) do
+            if object:IsA("Part") and object.Size.Magnitude < 10 then
+                object:Destroy()
+            end
+        end
+        -- Giảm độ sáng xuống 70%
+        game.Lighting.Ambient = Color3.fromRGB(179, 179, 179)  -- 70% độ sáng
+        game.Lighting.OutdoorAmbient = Color3.fromRGB(179, 179, 179)  -- 70% độ sáng
+    end
+})
+
+-- Fix Lag MAX (Giữ ánh sáng + Xóa nhà nhưng đứng được)
+FixLagTab:AddButton({
+    Title = "Fix Lag MAX",
+    Description = "80%",
+    Callback = function()
+        -- Remove Skybox Only
+        local Lighting = game:GetService("Lighting")
+        for _, v in pairs(Lighting:GetChildren()) do
+            if v:IsA("Sky") then
+                v:Destroy()
+            end
+        end
+
+        -- Rendering Settings
+        settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+        pcall(function()
+            settings().Rendering.VSync = false
+        end)
+
+        -- Workspace Optimization
+        for _, obj in pairs(workspace:GetDescendants()) do
+            if obj:IsA("BasePart") or obj:IsA("MeshPart") or obj:IsA("UnionOperation") then
+                -- Nếu vật thể là sàn nhà hoặc nền, giữ lại màu
+                if obj.Position.Y < 5 then -- Tọa độ thấp => là mặt đất/sàn
+                    obj.Material = Enum.Material.SmoothPlastic
+                    obj.Reflectance = 0
+                    obj.CastShadow = false
+                else
+                    -- Là nhà, đồ vật, làm trong suốt
+                    obj.Material = Enum.Material.SmoothPlastic
+                    obj.Reflectance = 0
+                    obj.CastShadow = false
+                    obj.Transparency = 1 -- Làm trong suốt nhưng vẫn đứng được
+                    if obj:FindFirstChild("Texture") then
+                        obj.Texture:Destroy()
+                    end
+                end
+            elseif obj:IsA("Decal") or obj:IsA("Texture") then
+                obj:Destroy()
+            elseif obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Fire") or obj:IsA("Sparkles") then
+                obj:Destroy()
+            elseif obj:IsA("Mesh") then
+                obj:Destroy()
+            end
+        end
+
+        -- Clear Terrain Water
+        local terrain = workspace:FindFirstChildOfClass("Terrain")
+        if terrain then
+            terrain.WaterWaveSize = 0
+            terrain.WaterWaveSpeed = 0
+            terrain.WaterReflectance = 0
+            terrain.WaterTransparency = 1
+        end
+
+        -- Clear Effects Folder
+        if workspace:FindFirstChild("Effects") then
+            workspace.Effects:Destroy()
+        end
     end
 })
