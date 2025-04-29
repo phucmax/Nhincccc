@@ -389,10 +389,17 @@ FixLagTab:AddButton({
 })
 
 local hopsevervipTab= Window:AddTab({
-    Title = "hop sever full mon",
+    Title = "hop sever vip",
     Icon = "server"
 })
 
+hopsevervipTab:AddButton({
+    Title = "teddy hub hop all",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletgojo/Haidepzai/refs/heads/main/TEDDY-PREMIUM"))()```
+    end
+})
 
 hopsevervipTab:AddButton({
     Title = "script hop full mon",
