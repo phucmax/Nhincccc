@@ -149,6 +149,52 @@ MainTab:AddButton({
     end
 })
 
+local scripvnTab = Window:AddTab({
+    Title = "Script VN",
+    Icon = "package"
+})
+
+
+scripvnTTab:AddParagraph({
+    Title = "chú ý",
+    Content = "không được dùng quá nhiều script cùng một lúc"
+   
+})
+
+
+scripvnTTab:AddButton({
+    Title = "RUBU",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/RubuRoblox/refs/heads/main/RubuBF"))()
+    end
+})
+
+scripvnTTab:AddButton({
+    Title = "AnDepZaiHub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AnDepZaiHub/AnDepZaiHubBeta/refs/heads/main/AnDepZaiHubNewUpdated.lua"))()
+    end
+})
+
+scripvnTTab:AddButton({
+    Title = "min",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Zunes-Bypassed/NOPE/main/Min.lua"))()
+    end
+})
+
+scripvnTTab:AddButton({
+    Title = "BapRed",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/BapRed/main/BapRedHub"))()
+    end
+})
+
 
 local MainTab = Window:AddTab({
     Title = "script auto bounty",
