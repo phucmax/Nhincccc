@@ -329,7 +329,7 @@ FixLagTab:AddButton({
 })
 local hopsevervipTab= Window:AddTab({
     Title = "hop sever full mon",
-    Icon = "server"
+    Icon = ""
 })
 
 
