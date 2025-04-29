@@ -188,8 +188,8 @@ bountyTab:AddButton({
 local fixlagTab = Window:AddTab({ Title = "Script FIX LAG" })
 
 fixlagTab:AddButton({
-    Title = "Fix Lag X1 (Nhẹ)",
-    Description = "Tắt hiệu ứng cơ bản và giảm đồ họa",
+    Title = "Fix Lag X1 (40%)",
+    Description = "",
     Callback = function()
         local Lighting = game:GetService("Lighting")
         Lighting.GlobalShadows = false
@@ -204,8 +204,8 @@ fixlagTab:AddButton({
 })
 
 fixlagTab:AddButton({
-    Title = "Fix Lag X2 (Vừa)",
-    Description = "Tắt hiệu ứng nâng cao, giảm chi tiết",
+    Title = "Fix Lag X2 (50%)",
+    Description = "",
     Callback = function()
         local function ClearEffects()
             for _, v in pairs(workspace:GetDescendants()) do
@@ -220,8 +220,8 @@ fixlagTab:AddButton({
 })
 
 fixlagTab:AddButton({
-    Title = "Fix Lag X3 (Mạnh)",
-    Description = "Giảm tối đa chi tiết vật thể và hiệu ứng",
+    Title = "Fix Lag X3 (60%)",
+    Description = "",
     Callback = function()
         for _, v in pairs(workspace:GetDescendants()) do
             if v:IsA("Decal") or v:IsA("Texture") then
@@ -233,8 +233,8 @@ fixlagTab:AddButton({
 })
 
 fixlagTab:AddButton({
-    Title = "Fix Lag MAX (Cực Mạnh)",
-    Description = "Xóa cây, nhà, hiệu ứng, chỉ giữ nền để đứng",
+    Title = "Fix Lag MAX (70%)",
+    Description = "",
     Callback = function()
         -- Xóa tất cả đối tượng không cần thiết trong workspace
         for _, obj in pairs(workspace:GetChildren()) do
