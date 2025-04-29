@@ -1,108 +1,222 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "PHUCMAX HUB",
-    SubTitle = "Script Tổng Hợp",
-    TabWidth = 150,
-    Size = UDim2.fromOffset(560, 360),
-    Acrylic = true,
-    Theme = "Darker",
-    MinimizeKey = Enum.KeyCode.End
+
+Title = "PHUCMAX HUB",
+
+SubTitle = "Script Tổng Hợp ",
+
+TabWidth = 150,
+
+Size = UDim2.fromOffset(560, 360),
+
+Acrylic = true,
+
+Theme = "Darker",
+
+MinimizeKey = Enum.KeyCode.End
+
 })
 
--- Tạo GUI điều khiển toggle
+-- Tạo ScreenGui chứa nút điều khiển
+
 local screenGui = Instance.new("ScreenGui")
+
 screenGui.Name = "ControlGUI"
+
 screenGui.Parent = game.CoreGui
 
+-- Tạo nút (ImageButton)
+
+-- Tạo nút (ImageButton)
+
 local toggleButton = Instance.new("ImageButton")
+
 toggleButton.Size = UDim2.new(0, 45, 0, 45)
+
 toggleButton.Position = UDim2.new(0, 10, 0, 10)
+
 toggleButton.Image = "rbxassetid://114009263825021"
+
 toggleButton.BackgroundTransparency = 1
+
 toggleButton.Parent = screenGui
 
 local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 10)
+
+corner.CornerRadius = UDim.new(0, 10) -- Bo góc, có thể chỉnh số pixel theo ý
+
 corner.Parent = toggleButton
 
+-- Biến lưu trạng thái hiển thị Fluent UI
+
 local isFluentVisible = true
+
+-- Di chuyển nút
+
 local dragging, dragInput, dragStart, startPos
 
 local function update(input)
-    local delta = input.Position - dragStart
-    toggleButton.Position = UDim2.new(
-        startPos.X.Scale,
-        startPos.X.Offset + delta.X,
-        startPos.Y.Scale,
-        startPos.Y.Offset + delta.Y
-    )
+
+local delta = input.Position - dragStart
+
+toggleButton.Position = UDim2.new(
+
+    startPos.X.Scale,
+
+    startPos.X.Offset + delta.X,
+
+    startPos.Y.Scale,
+
+    startPos.Y.Offset + delta.Y
+
+)
+
 end
 
 toggleButton.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = toggleButton.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
+
+if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+
+    dragging = true
+
+    dragStart = input.Position
+
+    startPos = toggleButton.Position
+
+    input.Changed:Connect(function()
+
+        if input.UserInputState == Enum.UserInputState.End then
+
+            dragging = false
+
+        end
+
+    end)
+
+end
+
 end)
 
 toggleButton.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
+
+if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement then
+
+    dragInput = input
+
+end
+
 end)
 
 game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if dragging and input == dragInput then
-        update(input)
-    end
+
+if dragging and input == dragInput then
+
+    update(input)
+
+end
+
 end)
+
+-- Ẩn/Hiện Fluent UI khi nhấn nút
 
 toggleButton.MouseButton1Click:Connect(function()
-    isFluentVisible = not isFluentVisible
-    Window:Minimize(not isFluentVisible)
+
+isFluentVisible = not isFluentVisible
+
+
+
+if isFluentVisible then
+
+    -- Hiện Fluent UI
+
+    Window:Minimize(false) -- Mở lại cửa sổ
+
+else
+
+    -- Ẩn Fluent UI
+
+    Window:Minimize(true) -- Thu nhỏ cửa sổ
+
+end
+
 end)
-
--- Tab Tổng Hợp
-local generalTab = Window:AddTab({
-    Title = "Script Tổng Hợp",
+local MainTab = Window:AddTab({
+    Title = "Script Tổng Hợp ngon",
     Icon = "package"
 })
 
-generalTab:AddParagraph({
-    Title = "Chú Ý",
-    Content = "Không được dùng quá nhiều script cùng một lúc"
+
+MainTab:AddParagraph({
+    Title = "chú ý",
+    Content = "không được dùng quá nhiều script cùng một lúc"
+   
 })
 
-generalTab:AddButton({Title = "TsuoHub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))() end})
-generalTab:AddButton({Title = "Xero Hub", Callback = function() getgenv().Team = "Marines"; getgenv().Hide_Menu = false; getgenv().Auto_Execute = false; loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))() end})
-generalTab:AddButton({Title = "Redz Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))() end})
-generalTab:AddButton({Title = "Hoho Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))() end})
-generalTab:AddButton({Title = "W-Azure", Callback = function() loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))() end})
-generalTab:AddButton({Title = "Turbo Lite", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/Main.lua"))() end})
-generalTab:AddButton({Title = "Tuấn Anh IOS Hub", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/AnhDzaiScript/TuanAnhIOS/refs/heads/main/TuanAnhIOS-Piaa.lua"))() end})
 
--- Tab Script Việt Nam
-local scripvnTab = Window:AddTab({
-    Title = "Script VN",
-    Icon = "package"
+MainTab:AddButton({
+    Title = "xero hub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        getgenv().Team = "Marines"
+getgenv().Hide_Menu = false
+getgenv().Auto_Execute = false
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()
+    end
+})
+MainTab:AddButton({
+    Title = "redz hub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+    
+loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))()
+    end
+})
+MainTab:AddButton({
+    Title = "hoho hub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()
+    end
+})
+MainTab:AddButton({
+    Title = "w-azure",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
+    end
+})
+MainTab:AddButton({
+    Title = "Turbo Lite",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/Main.lua"))()
+    end
 })
 
-scripvnTab:AddParagraph({
-    Title = "Chú Ý",
-    Content = "Không được dùng quá nhiều script cùng một lúc"
+MainTab:AddButton({
+    Title = "tuấn anh IOS hub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnhDzaiScript/TuanAnhIOS/refs/heads/main/TuanAnhIOS-Piaa.lua"))()
+    end
 })
 
-scripvnTab:AddButton({Title = "RUBU", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/RubuRoblox/refs/heads/main/RubuBF"))() end})
-scripvnTab:AddButton({Title = "AnDepZaiHub", Callback = function() repeat wait() until game:IsLoaded() and game.Players.LocalPlayer; loadstring(game:HttpGet("https://raw.githubusercontent.com/AnDepZaiHub/AnDepZaiHubBeta/refs/heads/main/AnDepZaiHubNewUpdated.lua"))() end})
-scripvnTab:AddButton({Title = "Min", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Zunes-Bypassed/NOPE/main/Min.lua"))() end})
-scripvnTab:AddButton({Title = "BapRed", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/BapRed/main/BapRedHub"))() end})
+MainTab:AddButton({
+    Title = "Vxezehub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHubMain"))()
+    end
+})
+
+hopsevervipTab:AddButton({
+    Title = "teddy hub hop all",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletgojo/Haidepzai/refs/heads/main/TEDDY-PREMIUM"))()```
+    end
+})
 
 -- Tab Auto Bounty
 local bountyTab = Window:AddTab({
