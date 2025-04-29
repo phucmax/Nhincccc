@@ -93,6 +93,13 @@ MainTab:AddParagraph({
    
 })
 
+MainTab:AddButton({
+    Title = "TsuoHub",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))()
+    end
+})
 
 MainTab:AddButton({
     Title = "xero hub",
