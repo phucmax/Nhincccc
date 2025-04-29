@@ -327,3 +327,67 @@ FixLagTab:AddButton({
         end
     end
 })
+local hopsevervipTab= Window:AddTab({
+    Title = "hop sever full mon",
+    Icon = "server"
+})
+
+
+hopsevervipTab:AddButton({
+    Title = "script hop vip",
+    Description = "nhấn để chạy script",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AnhTuanDzai-Hub/ScriptHopBoss/refs/heads/main/HopFullMom.lua"))()
+end
+})
+hopsevervipTab:AddButton({
+    Title = "script hop boss",
+    Description = "nhấn để chạy script",
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/Min/refs/heads/main/MinHopBoss"))()
+end
+})
+local fruitTab = Window:AddTab({
+    Title = "script auto nhặt trái",
+    Icon = "apple"
+})
+
+
+fruitTab:AddButton({
+    Title = "Turbo Lite Nhặt Trái",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/TraiCay.lua"))()
+    end
+})
+
+local aimbotvipTab = Window:AddTab({
+    Title = "aimbot vip",
+    Icon = "crosshair"
+})
+aimbotvipTab:AddParagraph({
+    Title = "chú ý",
+    Content = "chú ý com cặc script aimbot chứ gì mà chú ý "
+
+aimbotvipTab:AddButton({
+    Title = "aimbot Tuấn Anh IOS",
+    Description = "nhấn để chạy script ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnhTuanDzai-Hub/AimBotSkibidi/refs/heads/main/TuanAnhIOS-AIMBOT.Lua"))()
+    end
+})
+
+local lastNotificationTime = 0
+local notificationCooldown = 10
+local currentTime = tick()
+
+if currentTime - lastNotificationTime >= notificationCooldown then
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "phucmaxtonghop", 
+        Text = "Đã Tải Xong",
+        Duration = 1,
+        Icon = "rbxassetid://114009263825021" -- Thay bằng ID logo bạn muốn
+    })
+    lastNotificationTime = currentTime
+end
+ 
