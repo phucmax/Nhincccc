@@ -178,11 +178,88 @@ severTab:AddButton({
 
 local bountyTab = Window:AddTab({ Title = "Script AUTO BOUNTY" })
 bountyTab:AddButton({
-    Title = "Lion Auto Bounty",
+    Title = "Auto Bounty",
     Description = "nhấn để chạy script",
     Callback = function()
-        loadstring(game:HttpGet("https://pastefy.app/l1siGJS1/raw"))()
-    end
+        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Team = "Pirates"
+getgenv().Config = {
+    ["Safe Health"] = {50},
+    ["Custom Y Run"] = {
+        Enabled = true,
+        ["Y Run"] = 5000
+    },
+    ["Hunt Method"] = {
+        ["Use Move Predict"] = true,
+        ["Hit and Run"] = true,
+        ["Aimbot"] = true,
+        ["ESP Player"] = true,
+        ["Max Attack Time"] = 60
+    },
+    ["Shop"] = {
+        ["Random Fruit"] = false,
+        ["Store Fruit"] = true,
+        ["Zoro Sword"] = false
+    },
+    ["Setting"] = {
+        ["World"] = nil,
+        ["White Screen"] = false,
+        ["Click Delay"] = 0.2,
+        ["Url"] = "Your_Webhook_Url",
+        ["Chat"] = {
+            Enabled = true,
+            Wait = 350,
+            Massage = {"Lion Hub On Top", "Get Best Script g g / lionhub"}
+        }
+    },
+    ["Skip"] = {
+        ["Avoid V4"] = false
+    },
+    ["Spam All Skill On V4"] = {
+        Enabled = true,
+        ["Weapons"] = {"Melee", "Sword", "Gun", "Blox Fruit"}
+    },
+    Items = {
+        Use = {"Melee", "Sword"},
+        Melee = {
+            Enable = true,
+            Delay = 0.6,
+            Skills = {
+                Z = {Enable = true, HoldTime = 0.3},
+                X = {Enable = true, HoldTime = 0.2},
+                C = {Enable = true, HoldTime = 0.5}
+            }
+        },
+        Sword = {
+            Enable = true,
+            Delay = 0.5,
+            Skills = {
+                Z = {Enable = true, HoldTime = 1},
+                X = {Enable = true, HoldTime = 0}
+            }
+        },
+        Gun = {
+            Enable = false,
+            Delay = 0.2,
+            Skills = {
+                Z = {Enable = false, HoldTime = 0.1},
+                X = {Enable = false, HoldTime = 0.1}
+            }
+        },
+        ["Blox Fruit"] = {
+            Enable = true,
+            Delay = 0.4,
+            Skills = {
+                Z = {Enable = true, HoldTime = 0.1},
+                X = {Enable = true, HoldTime = 0.1},
+                C = {Enable = true, HoldTime = 0.15},
+                V = {Enable = false, HoldTime = 0.2},
+                F = {Enable = true, HoldTime = 0.1}
+            }
+        }
+    }
+}
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/10f7f97cebba24a87808c36ebd345a97.lua"))()    end
 })
 
 local fixlagTab = Window:AddTab({ Title = "Script FIX LAG" })
