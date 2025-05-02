@@ -9,7 +9,7 @@ local Window = Fluent:CreateWindow({
     Theme = "Darker",
     MinimizeKey = Enum.KeyCode.End
 })
--- HIỂN THỊ FPS
+
 local RunService = game:GetService("RunService")
 
 local fpsLabel = Instance.new("TextLabel")
